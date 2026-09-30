@@ -1,0 +1,150 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Italiana", serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-cream: #F8F1E7;
+  --color-beige: #EFE2D2;
+  --color-offwhite: #FFFDFC;
+  --color-charcoal: #191716;
+  --color-taupe: #75685D;
+  --color-burgundy: #9E1F2D;
+  --color-walnut: #3A241C;
+  --color-champagne: #D8B98A;
+  --color-softborder: #DCCFC0;
+  --color-ink: #191716;
+  --color-ivory: #F8F1E7;
+  --color-smoke: #3A241C;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: #F8F1E7;
+  --foreground: #191716;
+  --card: #FFFDFC;
+  --card-foreground: #191716;
+  --popover: #FFFDFC;
+  --popover-foreground: #191716;
+  --primary: #9E1F2D;
+  --primary-foreground: #FFFDFC;
+  --secondary: #EFE2D2;
+  --secondary-foreground: #191716;
+  --muted: #EFE2D2;
+  --muted-foreground: #75685D;
+  --accent: #D8B98A;
+  --accent-foreground: #191716;
+  --destructive: #B91C1C;
+  --destructive-foreground: #FFFDFC;
+  --border: #DCCFC0;
+  --input: #DCCFC0;
+  --ring: #9E1F2D;
+  --ink: #191716;
+  --ivory: #F8F1E7;
+  --champagne: #D8B98A;
+  --smoke: #3A241C;
+  --burgundy: #9E1F2D;
+  --walnut: #3A241C;
+  --taupe: #75685D;
+}
+
+.dark {
+  --background: #191716;
+  --foreground: #F8F1E7;
+  --card: #24201E;
+  --card-foreground: #F8F1E7;
+  --popover: #24201E;
+  --popover-foreground: #F8F1E7;
+  --primary: #9E1F2D;
+  --primary-foreground: #FFFDFC;
+  --secondary: #2E2926;
+  --secondary-foreground: #F8F1E7;
+  --muted: #2E2926;
+  --muted-foreground: #A89B90;
+  --accent: #D8B98A;
+  --accent-foreground: #191716;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFDFC;
+  --border: rgba(220, 207, 192, 0.2);
+  --input: rgba(220, 207, 192, 0.2);
+  --ring: #9E1F2D;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  html { scroll-behavior: smooth; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; }
+  ::selection { background: var(--accent); color: var(--accent-foreground); }
+}
+
+@keyframes salon-intro { 0% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes salon-mark { 0% { opacity: 0; transform: translateY(12px); } 40%, 80% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
+@keyframes hero-reveal { from { opacity: 0; transform: scale(1.035); } to { opacity: 1; transform: scale(1); } }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sweep { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(220%) skewX(-20deg); } }
+
+@utility salon-intro { animation: salon-intro 1.35s ease forwards; }
+@utility salon-mark { animation: salon-mark 1.15s ease forwards; }
+@utility hero-reveal { animation: hero-reveal 1.5s cubic-bezier(.2,.8,.2,1) both; }
+@utility rise-one { animation: rise .7s .8s ease both; }
+@utility rise-two { animation: rise .7s 1s ease both; }
+@utility rise-three { animation: rise .7s 1.15s ease both; }
+@utility light-sweep { animation: sweep 1s .1s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
